@@ -1,0 +1,26 @@
+(function(document, window) {
+  if (window.mayISeeLaunched) {
+    return;
+  }
+  window.mayISeeLaunched = true;
+
+  var mayISeeContainer, mayISeeJsBundle, mayISeeCssBundle;
+
+  mayISeeContainer = document.createElement('div');
+  mayISeeContainer.id = 'mayISee__app';
+  document.body.appendChild(mayISeeContainer);
+
+{{#each htmlWebpackPlugin.files.js}}
+  mayISeeJsBundle = document.createElement('script');
+  mayISeeJsBundle.src = '{{this}}';
+  document.head.appendChild(mayISeeJsBundle);
+{{/each}}
+{{#each htmlWebpackPlugin.files.css}}
+  mayISeeCssBundle  = document.createElement('link');
+  link.rel  = 'stylesheet';
+  link.type = 'text/css';
+  link.href = '{{this}}';
+  link.media = 'all';
+  document.head.appendChild(mayISeeCssBundle);
+{{/each}}
+})(document, window)
